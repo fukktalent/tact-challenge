@@ -136,12 +136,7 @@ contract Task5 with Deployable {
       require(myAddress() == sender(), "Invalid sender");
     }
 
-    let toRepeat: Int = self.totalNftsHeld; // todo: replace to min()
-    if (toRepeat > 150) {
-      toRepeat = 150;
-    }
-
-    repeat (toRepeat) {
+    repeat (max(150, self.totalNftsHeld)) {
       self.totalNftsHeld = self.totalNftsHeld - 1;
       send(SendParameters{
         to: self.nfts.get(self.totalNftsHeld)!!,
